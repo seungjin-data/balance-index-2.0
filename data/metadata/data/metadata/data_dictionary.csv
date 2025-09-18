@@ -1,0 +1,15 @@
+variable,description,type,unit,valid_range,allowed_values,missing_code,derivation,source,notes
+country,English country name,string,,,ISO English names,NA,,UN/ISO,Use a single canonical naming scheme.
+iso3,ISO3 country code,string,,,A-Z (3 letters),NA,,ISO,"e.g. KOR, USA, DEU"
+year,reference year,int,year,1990-2100,,NA,,Various,Panel or snapshot indicator by year.
+bi2,Balance Index 2.0 (symmetric KL),float,index (non-negative),"0 to +inf",,NA,"BI2 = 0.5*(KL(s||d)+KL(d||s))",This repo,Lower = better alignment.
+employment_rate,adult employment rate,float,share,0-1,,NA,,OECD/ILO,Store as 0-1; display as % in manuscript.
+region,region/cluster label,string,,,"Europe; Asia; Africa; Oceania; North America; South America",NA,,WB/UN,Keep labels consistent with manuscript.
+is_imputed,imputation flag (1 if imputed),int,flag,0-1,"0;1",NA,,This repo,See IMPUTATION_NOTES.md for rules.
+stem_share,share of STEM graduates,float,share,0-1,,NA,,UNESCO UIS,Optional summary metric.
+humanities_share,share of Humanities graduates,float,share,0-1,,NA,,UNESCO UIS,Optional summary metric.
+ai_readiness,AI readiness index,float,index,0-100,,NA,,Oxford Insights,Document scale/version in Data README.
+innovation_index,innovation index,float,index,0-100,,NA,,WIPO,Record year and edition.
+gdp_per_capita,nominal GDP per capita (USD),float,USD,>=0,,NA,,World Bank,If log-transformed, note it in methods.
+neet_rate,NEET rate,float,share,0-1,,NA,,ILO/World Bank,Specify age band in Data README.
+notes,free-form notes,string,,,,NA,,This repo,Optional per-row commentary.
