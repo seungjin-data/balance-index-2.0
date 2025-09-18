@@ -1,0 +1,11 @@
+# SHA256 checksums for raw source files placed under data/raw/
+# Generate with:  sha256sum <filename>  (Linux/macOS)  or  certutil -hashfile <filename> SHA256  (Windows)
+
+<sha256sum>  data/raw/unesco_wide_data.csv
+<sha256sum>  data/raw/oecd_employment_data.csv
+<sha256sum>  data/raw/ilo_youth_employment.csv
+<sha256sum>  data/raw/world_bank_indicators.csv
+<sha256sum>  data/raw/oxford_ai_readiness.csv
+<sha256sum>  data/raw/imf_ai_preparedness.csv
+<sha256sum>  data/raw/wipo_innovation_index.csv
+<sha256sum>  data/raw/bls_job_postings.csv
