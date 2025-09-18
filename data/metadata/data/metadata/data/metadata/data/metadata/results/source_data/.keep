@@ -1,0 +1,85 @@
+5-A) Create the folder
+
+On GitHub: Add file → Create new file
+
+Path: results/source_data/.keep
+
+Leave the file empty and Commit (this ensures the folder exists).
+You may skip this if you will immediately add a CSV below (GitHub will create the folder automatically).
+
+5-B) Figure 1 — World Map (source data)
+
+Path: results/source_data/F1_world_map_source.csv
+Paste:
+iso3,country,year,bi2,region,is_imputed
+EGY,Egypt,2024,0.017,Africa,0
+MEX,Mexico,2024,0.020,North America,0
+FIN,Finland,2024,0.023,Europe,0
+Notes
+
+bi2 = Balance Index 2.0 (symmetric KL; non-negative).
+
+Store shares/indices as numbers, not formatted strings.
+
+Replace rows with your final country list before submission.
+
+Suggested commit message
+data(source): add F1_world_map_source.csv (BI2 by country for world map)
+
+5-C) Figure 2 — Correlation (BI2 vs Employment)
+
+Path: results/source_data/F2_correlation_source.csv
+Paste:
+country,iso3,year,bi2,employment_rate,region
+Germany,DEU,2024,0.449,0.884,Europe
+Latvia,LVA,2024,0.523,0.816,Europe
+Burkina Faso,BFA,2024,5.219,0.714,Africa
+Notes
+
+employment_rate stored as 0–1 (e.g., 0.884 = 88.4%).
+
+Use this file to regenerate the scatter, regression line, and statistics.
+data(source): add F2_correlation_source.csv (BI2 vs employment)
+
+5-D) Table 1 — Country Rankings
+
+Path: results/source_data/T1_country_rankings_source.csv
+Paste:
+rank,country,iso3,year,bi2,employment_rate,region,is_imputed,notes
+1,Egypt,EGY,2024,0.017,0.841,Africa,0,Optimal balance
+2,Mexico,MEX,2024,0.020,0.692,North America,0,Optimal balance
+3,Italy,ITA,2024,0.021,0.832,Europe,0,Optimal balance
+21,Germany,DEU,2024,0.449,0.884,Europe,0,Severe imbalance group (example)
+133,Burkina Faso,BFA,2024,5.219,0.714,Africa,1,Check imputation status
+Notes
+
+Sort by bi2 ascending (lower = better alignment).
+
+Keep is_imputed consistent with your imputation policy.
+
+Suggested commit message
+data(source): add T1_country_rankings_source.csv (journal source data for Table 1)
+5-E) Optional (good practice, if used in the manuscript)
+Figure 3 — Regional Means
+
+Path: results/source_data/F3_regional_means_source.csv
+Paste:
+region,year,mean_bi2,mean_employment_rate,n_countries
+Europe,2024,0.156,0.857,20
+Asia,2024,0.289,0.781,6
+Africa,2024,2.618,0.778,2
+
+Commit message
+data(source): add F4_time_window_source.csv (temporal sensitivity)
+5-F) Formatting & QA rules (apply to all files)
+
+Encoding: UTF-8; Delimiter: comma.
+
+Units: store rates as 0–1; convert to % only in manuscript figures/tables.
+
+Decimals: keep consistent precision (e.g., 3 decimals for rates, 3 for BI2).
+
+IDs: include iso3 for robust joins; keep year consistent across files.
+
+Validation: no empty headers; no mixed types in a column; avoid thousands separators.
+Suggested commit message
