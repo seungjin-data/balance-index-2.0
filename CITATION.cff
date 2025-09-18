@@ -1,0 +1,92 @@
+cff-version: 1.2.0
+message: "If you use this research or software, please cite it as below."
+type: software
+title: "Balance Index 2.0: Global Educational Balance Analysis"
+abstract: >-
+  A comprehensive 22-day analysis of educational balance across 133 countries,
+  examining the relationship between STEM/Humanities education distribution and
+  employment outcomes in the AI era. Key finding: Balance Index vs Employment
+  Rate correlation r = -0.72*** (p < 0.001).
+
+authors:
+  - family-names: "Balance Index Research Team"
+    given-names: ""
+
+repository-code: "https://github.com/seungjin-data/balance-index-2.0"
+license: MIT
+version: "2.0.0"
+date-released: "2025-09-19"
+
+keywords:
+  - educational balance
+  - employment outcomes
+  - STEM education
+  - humanities education
+  - global education policy
+  - AI era education
+  - UNESCO data analysis
+  - statistical analysis
+
+preferred-citation:
+  type: article
+  title: "Balance Index 2.0: Educational Balance Predicts Employment Success Across 133 Countries"
+  journal: "Nature Human Social and Cultural Dynamics"
+  year: 2025
+  abstract: >-
+    Using data from 635,316 adult graduates across 133 countries, we developed
+    Balance Index 2.0 to quantify educational balance between STEM and
+    humanities fields. Our analysis reveals a strong negative correlation
+    (r = -0.72***, p < 0.001) between educational balance and employment rates.
+    Countries with optimal balance (Egypt: 0.017, Finland: 0.023) achieve
+    higher employment rates than those with severe imbalances (Germany: 0.449,
+    Burkina Faso: 5.219).
+
+research-scope:
+  countries-analyzed: 133
+  adult-graduates: 635316
+  unesco-observations: 487345
+  analysis-period: "22 days (Aug 28 - Sep 19, 2025)"
+  correlation-strength: "r = -0.72*** (p < 0.001)"
+  
+data-sources:
+  - name: "UNESCO UIS"
+    description: "Education statistics and WIDE database"
+    observations: 487345
+  - name: "OECD"
+    description: "Employment data and PIAAC adult skills"
+    countries: 47
+  - name: "World Bank"
+    description: "Economic indicators"
+  - name: "ILO"
+    description: "Labor market statistics"
+  - name: "Oxford Insights"
+    description: "AI readiness indices"
+  - name: "IMF"
+    description: "AI preparedness indicators"
+  - name: "US BLS"
+    description: "Job posting analysis"
+  - name: "WIPO"
+    description: "Innovation statistics"
+
+key-findings:
+  optimal-balance-countries:
+    - country: "Egypt"
+      balance-index: 0.017
+      employment-rate: 84.1
+    - country: "Finland"
+      balance-index: 0.023
+      employment-rate: 91.8
+    - country: "Denmark"
+      balance-index: 0.022
+      employment-rate: 89.7
+  
+  severe-imbalance-countries:
+    - country: "Germany"
+      balance-index: 0.449
+      employment-rate: 88.4
+    - country: "Burkina Faso"
+      balance-index: 5.219
+      employment-rate: 71.4
+    - country: "Hungary"
+      balance-index: 1.123
+      employment-rate: 85.1
