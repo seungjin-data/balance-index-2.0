@@ -112,7 +112,51 @@ Policy Implications
 ## Data availability
 The dataset analyzed in this study, *Balance Index 2.0 — Data Snapshot (v2.0.1)*, is openly available on Zenodo: https://doi.org/10.5281/zenodo.17156763
 
+## 📖 How to cite
+
+If you use this work, please cite:
+
+**Dataset (snapshot v2.0.1)**  
+Kim, SeungJin (2025). *Balance Index 2.0 — Data Snapshot (v2.0.1)*. Zenodo.  
+https://doi.org/10.5281/zenodo.17156763
+
+**All versions (latest DOI)**  
+Kim, SeungJin (2025). *Balance Index 2.0 — Data Snapshot*. Zenodo.  
+https://doi.org/10.5281/zenodo.17156762
+
+### BibTeX
+```bibtex
+@dataset{kim_2025_balance_index_v201,
+  author    = {Kim, SeungJin},
+  title     = {Balance Index 2.0 — Data Snapshot (v2.0.1)},
+  year      = {2025},
+  publisher = {Zenodo},
+  version   = {v2.0.1},
+  doi       = {10.5281/zenodo.17156763},
+  url       = {https://doi.org/10.5281/zenodo.17156763}
+}
+
+
 ⭐ Star this repository if useful for your research!
 
 22-day research • 635,316 graduates • 8 organizations • r = -0.72** validated*
 
+
+---
+
+## Step 3) CITATION.cff 점검(선택)
+
+저장소에 `CITATION.cff`가 이미 있지만, **버전/DOI가 최신인지** 확인해 주세요.  
+최신 스냅샷 DOI로 업데이트하면 좋아요:
+
+```yaml
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+title: "Balance Index 2.0 — Data Snapshot"
+authors:
+  - family-names: Kim
+    given-names: SeungJin
+version: "v2.0.1"
+doi: "10.5281/zenodo.17156763"
+date-released: "2025-09-19"
+license: MIT
