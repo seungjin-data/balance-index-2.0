@@ -1,4 +1,5 @@
 # Balance Index 2.0: Global Educational Balance Analysis
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17156763.svg)](https://doi.org/10.5281/zenodo.17156763)
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.9+-brightgreen.svg)
@@ -109,6 +110,8 @@ Policy Implications
 🌍 Universal principle across economic contexts
 🤖 AI-era readiness requires balanced skills
 
+## Data availability
+The dataset analyzed in this study, *Balance Index 2.0 — Data Snapshot (v2.0.1)*, is openly available on Zenodo: https://doi.org/10.5281/zenodo.17156763
 
 ⭐ Star this repository if useful for your research!
 
