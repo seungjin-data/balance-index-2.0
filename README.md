@@ -1,6 +1,5 @@
 # Balance Index 2.0: Global Educational Balance Analysis
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17156763.svg)](https://doi.org/10.5281/zenodo.17156763)
-
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.9+-brightgreen.svg)
 ![Countries](https://img.shields.io/badge/countries-133-red.svg)
