@@ -1,0 +1,6 @@
+rank,country,iso3,year,bi2,employment_rate,region,is_imputed,notes
+1,Egypt,EGY,2024,0.017,0.841,Africa,0,Optimal balance
+2,Mexico,MEX,2024,0.020,0.692,North America,0,Optimal balance
+3,Italy,ITA,2024,0.021,0.832,Europe,0,Optimal balance
+21,Germany,DEU,2024,0.449,0.884,Europe,0,Severe imbalance group (example)
+133,Burkina Faso,BFA,2024,5.219,0.714,Africa,1,Check imputation status
