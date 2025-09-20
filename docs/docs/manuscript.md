@@ -1,0 +1,2 @@
+{{N_POSTINGS}} | {{ICT_DEMAND_SHARE}} | {{ICT_SUPPLY_SHARE}} | {{N_UIS_RECORDS}} | {{N_GRADUATES}} | {{WINDOW_DATES}} | {{WINDOW_DATES_22DAY}} | {{US_STATES}}
+We analyze {{N_POSTINGS}} postings; ICT demand is {{ICT_DEMAND_SHARE}} vs supply {{ICT_SUPPLY_SHARE}}.
