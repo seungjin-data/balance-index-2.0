@@ -1,0 +1,8 @@
+N_POSTINGS: "<INT>"
+ICT_DEMAND_SHARE: "<예: 94.7%>"
+ICT_SUPPLY_SHARE: "<예: 12.4%>"
+N_UIS_RECORDS: "<INT>"          # UIS 원자료 사용 행 수
+N_GRADUATES: "635,316"          # 다르면 실제 값으로 교체
+WINDOW_DATES: "YYYY-MM-DD to YYYY-MM-DD"
+WINDOW_DATES_22DAY: ""
+US_STATES: []
