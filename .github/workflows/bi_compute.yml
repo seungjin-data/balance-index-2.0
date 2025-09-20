@@ -1,21 +1,26 @@
 name: BI compute (manual)
 
 on:
-  workflow_dispatch: {}            # 수동 실행 버튼
-  push:
-    branches: [ hssc-2025-sync ]   # 이 브랜치에 커밋되면 자동 실행
-    paths:
-      - 'code/**'
-      - 'data/raw/**'
-      - 'docs/**'
-      - '.github/workflows/bi_compute.yml'
+  # 수동 실행 + 실행할 Git ref 입력받기
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to checkout (branch/tag/SHA)"
+        required: true
+        default: "hssc-2025-sync"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      # 여기서 입력한 ref(예: hssc-2025-sync)를 체크아웃
+      - name: Checkout target ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
