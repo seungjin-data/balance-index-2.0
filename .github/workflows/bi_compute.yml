@@ -1,52 +1,74 @@
-name: BI compute (manual)
+name: BI compute (one-shot)
 
 on:
-  # 수동 실행 + 실행할 Git ref 입력받기
-  workflow_dispatch:
-    inputs:
-      ref:
-        description: "Git ref to checkout (branch/tag/SHA)"
-        required: true
-        default: "hssc-2025-sync"
+  workflow_dispatch: {}   # 버튼으로만 실행
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # 여기서 입력한 ref(예: hssc-2025-sync)를 체크아웃
+      # 0) 분석할 코드가 있는 브랜치 고정 체크아웃
       - name: Checkout target ref
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.ref }}
+          ref: hssc-2025-sync
 
+      # 1) 진단 + 원자료 존재 검사 (없으면 바로 원인 표시하고 종료)
+      - name: Verify inputs & show tree
+        run: |
+          echo "== BRANCH ==" && git rev-parse --abbrev-ref HEAD
+          echo "== TOP ==" && ls -lah
+          echo "== data/raw ==" && ls -lah data/raw || true
+          test -f data/raw/UNESCO_UIS.csv || (echo "::error::missing data/raw/UNESCO_UIS.csv"; exit 1)
+          test -f data/raw/OECD_EAG_2024.csv || (echo "::error::missing data/raw/OECD_EAG_2024.csv"; exit 1)
+          head -n 5 data/raw/UNESCO_UIS.csv || true
+          head -n 5 data/raw/OECD_EAG_2024.csv || true
+
+      # 2) 파이썬 설치 + 의존성 (없으면 자동으로 파일 만들어 설치)
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
 
-      - name: Install deps
+      - name: Install deps (robust)
         run: |
           python -m pip install -U pip
-          python -m pip install -r code/env/requirements.txt
+          if [ -f code/env/requirements.txt ]; then
+            REQ=code/env/requirements.txt
+          elif [ -f requirements.txt ]; then
+            REQ=requirements.txt
+          else
+            echo "pandas>=2.2
+numpy>=1.26
+scipy>=1.11
+statsmodels>=0.14
+matplotlib>=3.8
+pyreadstat
+pyyaml" > /tmp/reqs.txt
+            REQ=/tmp/reqs.txt
+          fi
+          echo "Using requirements: $REQ"
+          python -m pip install -r "$REQ"
 
+      # 3) (선택) 토큰 패치 — 없어도 무시
       - name: Patch tokens (optional)
         run: |
-          if [ -f docs/_autofill.yml ]; then python code/patch_tokens.py || true; fi
+          if [ -f docs/_autofill.yml ] && [ -f code/patch_tokens.py ]; then
+            python code/patch_tokens.py || true
+          fi
 
+      # 4) 핵심 파이프라인 실행
       - name: Run BI pipeline
         run: |
+          set -e
           python code/01_build_balance_index.py
           python code/02_oecd_validation.py
+          echo "== OUTPUTS =="
+          ls -lah data/processed || true
+          ls -lah tables || true
 
-      - name: Install pandoc & TeX
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex
-
-      - name: Export manuscript
-        run: bash .ci/export.sh
-
+      # 5) 결과물 업로드
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -54,5 +76,3 @@ jobs:
           path: |
             data/processed/**
             tables/**
-            docs/manuscript.pdf
-            docs/manuscript.docx
