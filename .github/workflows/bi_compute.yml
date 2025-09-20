@@ -1,41 +1,53 @@
 name: BI compute (manual)
 
 on:
-  workflow_dispatch: {}   # 버튼 눌러서 수동 실행
+  workflow_dispatch: {}            # 수동 실행 버튼
+  push:
+    branches: [ hssc-2025-sync ]   # 이 브랜치에 커밋되면 자동 실행
+    paths:
+      - 'code/**'
+      - 'data/raw/**'
+      - 'docs/**'
+      - '.github/workflows/bi_compute.yml'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
       - name: Install deps
         run: |
           python -m pip install -U pip
           python -m pip install -r code/env/requirements.txt
 
+      - name: Patch tokens (optional)
+        run: |
+          if [ -f docs/_autofill.yml ]; then python code/patch_tokens.py || true; fi
+
       - name: Run BI pipeline
         run: |
           python code/01_build_balance_index.py
           python code/02_oecd_validation.py
-        env:
-          PYTHONUTF8: 1
 
-      - name: Show outputs
+      - name: Install pandoc & TeX
         run: |
-          ls -lah data/processed || true
-          ls -lah tables || true
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex
 
-      - name: Upload artifacts (results)
+      - name: Export manuscript
+        run: bash .ci/export.sh
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: bi-results
           path: |
             data/processed/**
             tables/**
+            docs/manuscript.pdf
+            docs/manuscript.docx
