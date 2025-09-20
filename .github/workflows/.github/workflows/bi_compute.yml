@@ -1,0 +1,62 @@
+name: BI compute (manual)
+
+on:
+  workflow_dispatch: {}            # 수동 실행 버튼
+  push:                            # 이 브랜치에서 변경되면 자동 실행
+    branches: [ hssc-2025-sync ]
+    paths:
+      - 'code/**'
+      - 'data/raw/**'
+      - 'docs/**'
+      - '.github/workflows/bi_compute.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Python deps
+        run: |
+          python -m pip install -U pip
+          python -m pip install -r code/env/requirements.txt
+
+      # (선택) 토큰 자동 치환: docs/_autofill.yml → manuscript/SM/Methods
+      - name: Patch tokens
+        run: |
+          if [ -f docs/_autofill.yml ]; then
+            python code/patch_tokens.py || true
+          fi
+
+      - name: Run BI pipeline
+        run: |
+          python code/01_build_balance_index.py
+          python code/02_oecd_validation.py
+
+      # PDF/DOCX 내보내기 (pandoc + xelatex 설치)
+      - name: Install pandoc & TeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex
+
+      - name: Export manuscript (docx/pdf)
+        run: |
+          bash .ci/export.sh
+
+      - name: Upload artifacts (results)
+        uses: actions/upload-artifact@v4
+        with:
+          name: bi-results
+          path: |
+            data/processed/**
+            tables/**
+            docs/manuscript.pdf
+            docs/manuscript.docx
