@@ -1,5 +1,5 @@
 name: BI compute (auto-commit)
-
+# trigger
 on:
   # 이 워크플로우 파일을 수정해서 커밋하면 자동 실행됩니다.
   push:
